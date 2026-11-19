@@ -1,5 +1,5 @@
 Name:		japicmp
-Version:	0.23.1
+Version:	0.27.0
 Release:	1
 Summary:	Compare two versions of a Java archive
 Group:		Development/Java
@@ -22,9 +22,10 @@ BuildRequires:	javapackages-filesystem
 
 %description
 com.github.siom79.japicmp:japicmp %{version}. JarArchiveComparator
-reports removed, added, and changed classes. The main sources are
-compiled with javac at release 8 against the system javassist, Guava,
-and JAXB API jars.
+reports removed, added, and changed classes. 0.27.0 also reports added
+type bounds, new superinterfaces of interfaces, and changes to the
+native modifier. The main sources are compiled with javac at release 8
+against the system javassist, Guava, and JAXB API jars.
 
 %prep
 %autosetup -n japicmp-%{version} -p1
@@ -35,7 +36,7 @@ if [ -s binaries.list ]; then
 	exit 1
 fi
 find japicmp/src/main/java -name '*.java' | sort > sources.list
-test "$(wc -l < sources.list)" -eq 133
+test "$(wc -l < sources.list)" -eq 134
 
 %build
 set -eo pipefail
@@ -51,7 +52,7 @@ do
 done
 mkdir -p classes
 javac --release 8 -Xlint:-options -encoding UTF-8 -cp "$CP" -d classes @sources.list
-test "$(find classes -name '*.class' | wc -l)" -eq 205
+test "$(find classes -name '*.class' | wc -l)" -eq 207
 cp -a japicmp/src/main/resources/. classes/
 test -s classes/style.css
 test -s classes/html/methods.html

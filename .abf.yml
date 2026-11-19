@@ -1,2 +1,4 @@
 sources:
+  japicmp-0.27.0.tar.gz: a1655944d711c36622418087a130864c89ff0220
+removed_sources:
   japicmp-0.23.1.tar.gz: 519325573a4300c63fd8072aa1bda975e296abde
